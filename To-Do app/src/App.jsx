@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes,Route } from 'react-router-dom';
+import { BrowserRouter, Routes,Route , Navigate} from 'react-router-dom';
 import './App.css'
 
 import SignUp from './Components/Signup';
 import SignIn from './Components/Signin';
 import { Toaster} from 'react-hot-toast';
 import Todo from './Components/ToDo';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import {  useRecoilValue } from 'recoil';
 import NavBar from './Components/Navbar';
 import { loginStateAtom } from './atom';
 
@@ -25,8 +25,8 @@ function App() {
     <BrowserRouter>
    <NavBar /> 
     <Routes>
-      {!loginState  && <Route path='/signup' element={<SignUp/>} /> }
-      {!loginState  && <Route path='/signin' element={<SignIn/>} />}
+      <Route path='/signup' element={ loginState? <Navigate to="/" replace /> : <SignUp />} /> 
+      <Route path='/signin' element={loginState? <Navigate to="/" replace /> : <SignIn/>} />
       <Route path='/' element={<Todo/>} />
     </Routes>
     </BrowserRouter>

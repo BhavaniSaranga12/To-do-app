@@ -36,7 +36,7 @@ const TodoDetailsValidation = async(req, res,next) => {
         next(); 
     } catch (error) {
         console.log(error)
-        res.status(400).json({ error: error.errors, status:false}); // Respond with validation errors
+        res.status(400).json({ error: error.errors, status:false});
     }
 }
 
@@ -46,7 +46,7 @@ const checkAuthentication = async (req, res, next) => {
     const token = req.cookies.token;
     
     if (!token) {
-        return res.json({ status: false, message: "no token found" });
+        return res.status(401).json({ status: false, message: "no token found" });
     }
 
     try {
@@ -62,26 +62,39 @@ const checkAuthentication = async (req, res, next) => {
             }; 
             return next();
         } else {
-            return res.json({ status: false, message: "token expired"});
+            return res.status(401).json({ status: false, message: "token expired"});
         }
     } catch (error) {
         console.log(error);
-        return res.json({ status: false, message: error });
+        return res.status(500).json({ status: false, message: error });
     }
 };
 
+
+
+
+
+
+
 app.get('/', checkAuthentication,(req,res) => { 
     try {
-        res.json({status: true, details: req.user})
+        res.status(200).json({status: true, details: req.user})
     } catch (error) {
-        res.json({ status: false, message: error });
+        res.status(500).json({ status: false, message: error });
     }
 })
+
+
+
+
+
+
+
 app.post('/signup',  async (req,res)=> {
     try {
         const checkUser= await User.findOne({email: req.body.email});
         if(checkUser){
-            res.status(201).json({message: "user already exists", status:false})
+            res.status(409).json({message: "user already exists", status:false})
         }
         else {
         const newUser=  new User( {
@@ -116,11 +129,17 @@ app.post('/signup',  async (req,res)=> {
     }
     
 })
+
+
+
+
+
+
 app.post('/signin',  async (req,res)=> {
     try {
         const checkUser= await User.findOne({email: req.body.email});
         if(!checkUser){
-            return res.status(201).json({message: "user doesn't exist", status:false})
+            return res.status(404).json({message: "user doesn't exist", status:false})
         }
       const matchPassword= await bcrypt.compare(req.body.password,checkUser.password ) 
       if(matchPassword) {
@@ -140,7 +159,7 @@ app.post('/signin',  async (req,res)=> {
             httpOnly: true, 
             secure: true,
             
-        }).status(201).json({message: "sign in successful", status: true,details : {
+        }).status(200).json({message: "sign in successful", status: true,details : {
             name : checkUser.name,
             id:checkUser._id,
             todos: checkUser.todos
@@ -155,9 +174,14 @@ app.post('/signin',  async (req,res)=> {
     
 })
 
+
+
 app.get('/signout', (req,res)=> {
     res.clearCookie('token').status(200).json({message: "successfully signed out"})
 })
+
+
+
 
 app.post('/add-task',checkAuthentication,TodoDetailsValidation, async (req,res) => { 
 try {

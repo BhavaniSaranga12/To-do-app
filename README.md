@@ -26,13 +26,4 @@ This is a simple Todo application built using the MERN (MongoDB, Express.js, Rea
 - Node.js and npm installed on your machine
 - MongoDB Atlas account for database hosting
 
-### Installation
 
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-
-
-
-   

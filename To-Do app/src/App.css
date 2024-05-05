@@ -297,6 +297,7 @@ input[type="checkbox"] {
      border: 1px solid white;
      overflow: scroll;
      height: 500px;
+     width: 70%;
   }
 }
 

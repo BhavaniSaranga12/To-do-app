@@ -10,7 +10,9 @@ import {  useRecoilValue } from 'recoil';
 import NavBar from './Components/Navbar';
 import { loginStateAtom } from './atom';
 
-
+function NotFound() {
+  return <h1 style={{textAlign: "center"}}>404 - Not Found</h1>;
+}
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
       <Route path='/signup' element={ loginState? <Navigate to="/" replace /> : <SignUp />} /> 
       <Route path='/signin' element={loginState? <Navigate to="/" replace /> : <SignIn/>} />
       <Route path='/' element={<Todo/>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
     </BrowserRouter>
   

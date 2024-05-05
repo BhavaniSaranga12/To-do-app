@@ -42,11 +42,13 @@ const TodoDetailsValidation = async(req, res,next) => {
 
 
 
+
+
 const checkAuthentication = async (req, res, next) => {
     const token = req.cookies.token;
     
     if (!token) {
-        return res.status(401).json({ status: false, message: "no token found" });
+        return res.status(400).json({ status: false, message: "please Sign in/Sign up" });
     }
 
     try {
@@ -109,13 +111,13 @@ app.post('/signup',  async (req,res)=> {
                 email:req.body.email, 
                
             }
-           const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1m' })
+           const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' })
          
           const expirationTime = 7 * 24 * 60 * 60 * 1000;
            
             res.cookie("token",token,{
-                 maxAge: 60000,
-                // maxAge: expirationTime,
+                //  maxAge: 60000,
+                 maxAge: expirationTime,
                 httpOnly: true, 
                 secure: true,
                 
@@ -149,13 +151,13 @@ app.post('/signin',  async (req,res)=> {
             email: checkUser.email
         }
         
-        const currentTime = Date.now();
-       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'1m' })
+      
+       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'7d' })
       const expirationTime = 7 * 24 * 60 * 60 * 1000;
        
         res.cookie("token",token,{
-          maxAge:60000,
-            // maxAge: expirationTime,
+         // maxAge:60000,
+         maxAge: expirationTime,
             httpOnly: true, 
             secure: true,
             

@@ -20,8 +20,7 @@ const setUser=useSetRecoilState(userStateAtom)
    const handleSignIn= (e)=>{
       e.preventDefault();
       
-      console.log(email);
-      console.log(password);
+     
       axios({
          method: 'post',
          url: 'http://localhost:3000/signin',
@@ -49,7 +48,7 @@ const setUser=useSetRecoilState(userStateAtom)
         
          
        }).catch(error => {
-        // toast.error(error);
+        toast.error(error.response.data.message);
          console.error('Error:', error);
        });
    }
@@ -58,9 +57,9 @@ return <>
   <h2>Sign in</h2>
    <form onSubmit={handleSignIn}> 
    <div><label htmlFor="email">Email:</label> <br />
-     <input type="email" name="email" id="email" value={email} onChange={ (event)=> {setEmail(event.target.value)}}/></div> 
+     <input type="email" name="email" id="email" value={email} onChange={ (event)=> {setEmail(event.target.value)}} required/></div> 
      <div><label htmlFor="pwd">Password: </label> <br />
-     <input type="password" name="pwd" id="pwd" value={password} onChange={ (event)=> {setPassword(event.target.value)}} /></div>
+     <input type="password" name="pwd" id="pwd" value={password} onChange={ (event)=> {setPassword(event.target.value)}} required/></div>
     <button type="submit">Submit</button>
     
    </form>

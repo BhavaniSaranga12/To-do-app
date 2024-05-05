@@ -17,11 +17,7 @@ export default function SignUp(){
    const [email, setEmail]=useState("");
    const [password, setPassword]=useState("");
 
-   const handleSignInClick = () => {
-
-
-
-   }
+   
 
    const handleSignUp= (e)=>{
       e.preventDefault();
@@ -46,12 +42,14 @@ export default function SignUp(){
          
          navigate('/', {replace: true});
          }
-         else {
-          toast.error(response.data.message);
-         }
+         
   
        }).catch(error => {
-        // toast.error(error);
+        if (error.response && error.response.status === 409) {
+          toast.error(error.response.data.message);
+        }
+        else
+        toast.error("Error! Please try again");
          console.error('Error:', error);
        });
    }
@@ -59,11 +57,11 @@ return <div className="formdata">
     <h2>Sign up</h2>
    <form onSubmit={handleSignUp}> 
      <div><label htmlFor="name">Name:</label> <br />
-     <input type="text" name="name" id="name" value={name} onChange={ (event)=> {setName(event.target.value)}} /> </div>
+     <input type="text" name="name" id="name" value={name} onChange={ (event)=> {setName(event.target.value)}} required/> </div>
      <div><label htmlFor="email">Email:</label> <br />
-     <input type="email" name="email" id="email" value={email} onChange={ (event)=> {setEmail(event.target.value)}}/> </div>
+     <input type="email" name="email" id="email" value={email} onChange={ (event)=> {setEmail(event.target.value)}} required/> </div>
      <div><label htmlFor="pwd">Password: </label><br />
-     <input type="password" name="pwd" id="pwd" value={password} onChange={ (event)=> {setPassword(event.target.value)}} /></div>
+     <input type="password" name="pwd" id="pwd" value={password} onChange={ (event)=> {setPassword(event.target.value)}} required /></div>
     <button type="submit">Submit</button>
     <p>Already have an account? <span><Link to='/signin' id="link">Sign in</Link></span></p>
    </form>

@@ -26,7 +26,7 @@ export default function Todo(){
 
         axios({
           method: 'post',
-          url: 'http://localhost:3000/add-task',
+          url: 'https://to-do-app-server-fawn.vercel.app/add-task',
           data: {
             title: title, 
             des: des,
@@ -90,7 +90,7 @@ export default function Todo(){
 
       function handleUpdate(id){
       axios({
-        url: 'http://localhost:3000/updatetask/'+id,
+        url: 'https://to-do-app-server-fawn.vercel.app/updatetask/'+id,
         method: 'get',
       }).then(response => {
         console.log(response.data);
@@ -122,7 +122,7 @@ export default function Todo(){
       function handleDelete(id){
       
         axios({
-          url: 'http://localhost:3000/deletetask/'+id,
+          url: 'https://to-do-app-server-fawn.vercel.app/deletetask/'+id,
           method: 'get',
         }).then(response => {
           console.log(response.data);

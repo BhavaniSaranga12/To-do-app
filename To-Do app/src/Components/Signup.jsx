@@ -24,7 +24,7 @@ export default function SignUp(){
      
       axios({
          method: 'post',
-         url: 'http://localhost:3000/signup',
+         url: 'https://to-do-app-server-fawn.vercel.app/signup',
          headers: { 'Content-Type': 'application/json' },
          data: {
            name: name.toString(), 

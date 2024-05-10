@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import {  useSetRecoilState } from "recoil";
 import { loginStateAtom,todoStateAtom,userStateAtom } from "../atom";
 axios.defaults.withCredentials=true;
 

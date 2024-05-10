@@ -133,10 +133,6 @@ app.post('/signup',  async (req,res)=> {
 })
 
 
-
-
-
-
 app.post('/signin',  async (req,res)=> {
     try {
         const checkUser= await User.findOne({email: req.body.email});

@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser')
 dotenv.config();
 const app= express();
 app.use(cors({
-    origin:["https://to-do-app-frontend-phi.vercel.app"],
+    origin:["https://to-do-app-frontend-seven.vercel.app"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 

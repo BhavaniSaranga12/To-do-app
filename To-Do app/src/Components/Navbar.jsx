@@ -16,7 +16,8 @@ import axios from "axios";
   useEffect(()=>{
       axios({
         method:'get',
-        url:'https://to-do-app-backend-nu.vercel.app/'
+        url:'https://to-do-app-backend-nu.vercel.app/',
+        withCredentials: true
       }).then(response => {
         navigate('/')
         console.log('Response:', response.data);

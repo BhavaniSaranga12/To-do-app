@@ -31,7 +31,8 @@ export default function Todo(){
             title: title, 
             des: des,
             
-          }
+          },
+          withCredentials: true
         })
         .then(response => {
           console.log('Response:', response.data);
@@ -92,6 +93,7 @@ export default function Todo(){
       axios({
         url: 'https://to-do-app-backend-nu.vercel.app/updatetask/'+id,
         method: 'get',
+        withCredentials: true
       }).then(response => {
         console.log(response.data);
         if(response.data.status){
@@ -124,6 +126,7 @@ export default function Todo(){
         axios({
           url: 'https://to-do-app-backend-nu.vercel.app/deletetask/'+id,
           method: 'get',
+          withCredentials: true
         }).then(response => {
           console.log(response.data);
           if(response.data.status){

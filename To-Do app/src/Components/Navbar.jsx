@@ -16,7 +16,7 @@ import axios from "axios";
   useEffect(()=>{
       axios({
         method:'get',
-        url:'https://to-do-app-api-sage.vercel.app/'
+        url:'https://to-do-app-backend-nu.vercel.app/'
       }).then(response => {
         navigate('/')
         console.log('Response:', response.data);
@@ -46,7 +46,7 @@ import axios from "axios";
     const handleSignOut=()=>{
        axios({
         method:'get',
-        url:'https://to-do-app-api-sage.vercel.app/signout'
+        url:'https://to-do-app-backend-nu.vercel.app/signout'
        }).then((response)=>{
         
         console.log(response.data)

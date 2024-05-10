@@ -26,7 +26,7 @@ export default function Todo(){
 
         axios({
           method: 'post',
-          url: 'https://to-do-app-backend-nu.vercel.app/add-task',
+          url: '/add-task',
           data: {
             title: title, 
             des: des,
@@ -91,7 +91,7 @@ export default function Todo(){
 
       function handleUpdate(id){
       axios({
-        url: 'https://to-do-app-backend-nu.vercel.app/updatetask/'+id,
+        url: '/updatetask/'+id,
         method: 'get',
         withCredentials: true
       }).then(response => {
@@ -124,7 +124,7 @@ export default function Todo(){
       function handleDelete(id){
       
         axios({
-          url: 'https://to-do-app-backend-nu.vercel.app/deletetask/'+id,
+          url: '/deletetask/'+id,
           method: 'get',
           withCredentials: true
         }).then(response => {

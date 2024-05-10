@@ -24,7 +24,7 @@ export default function SignUp(){
      
       axios({
          method: 'post',
-         url: 'https://to-do-app-backend-nu.vercel.app/signup',
+         url: '/signup',
          headers: { 'Content-Type': 'application/json' },
          data: {
            name: name.toString(), 

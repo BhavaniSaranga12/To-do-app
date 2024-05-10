@@ -16,7 +16,7 @@ import axios from "axios";
   useEffect(()=>{
       axios({
         method:'get',
-        url:'https://to-do-app-backend-nu.vercel.app/',
+        url:'/',
         withCredentials: true
       }).then(response => {
         navigate('/')
@@ -47,7 +47,8 @@ import axios from "axios";
     const handleSignOut=()=>{
        axios({
         method:'get',
-        url:'https://to-do-app-backend-nu.vercel.app/signout'
+        url:'/signout',
+        withCredentials: true
        }).then((response)=>{
         
         console.log(response.data)

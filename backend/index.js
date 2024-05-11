@@ -80,7 +80,7 @@ const checkAuthentication = async (req, res, next) => {
 
 
 
-app.get('/', checkAuthentication,(req,res) => { 
+app.get('/api/', checkAuthentication,(req,res) => { 
     try {
         res.status(200).json({status: true, details: req.user})
     } catch (error) {
@@ -94,7 +94,7 @@ app.get('/', checkAuthentication,(req,res) => {
 
 
 
-app.post('/signup',  async (req,res)=> {
+app.post('/api/signup',  async (req,res)=> {
     try {
         const checkUser= await User.findOne({email: req.body.email});
         if(checkUser){
@@ -135,7 +135,7 @@ app.post('/signup',  async (req,res)=> {
 })
 
 
-app.post('/signin',  async (req,res)=> {
+app.post('/api/signin',  async (req,res)=> {
     try {
         const checkUser= await User.findOne({email: req.body.email});
         if(!checkUser){
@@ -176,14 +176,14 @@ app.post('/signin',  async (req,res)=> {
 
 
 
-app.get('/signout', (req,res)=> {
+app.get('/api/signout', (req,res)=> {
     res.clearCookie('token').status(200).json({message: "successfully signed out"})
 })
 
 
 
 
-app.post('/add-task',checkAuthentication,TodoDetailsValidation, async (req,res) => { 
+app.post('/api/add-task',checkAuthentication,TodoDetailsValidation, async (req,res) => { 
 try {
    
     const findUser= await User.findByIdAndUpdate(req.user.id, {
@@ -202,7 +202,7 @@ try {
 
 
 
-app.get('/updatetask/:id', checkAuthentication, async (req, res) => {
+app.get('/api/updatetask/:id', checkAuthentication, async (req, res) => {
     const id = req.params.id;
     try {
         const user = await User.findById(req.user.id);
@@ -222,7 +222,7 @@ app.get('/updatetask/:id', checkAuthentication, async (req, res) => {
     }
 });
 
-app.get('/deletetask/:id', checkAuthentication, async (req, res) => {
+app.get('/api/deletetask/:id', checkAuthentication, async (req, res) => {
     const id = req.params.id;
     try {
         const user = await User.findById(req.user.id);

@@ -26,7 +26,7 @@ export default function Todo(){
 
         axios({
           method: 'post',
-          url: '/add-task',
+          url: '/api/add-task',
           data: {
             title: title, 
             des: des,
@@ -91,7 +91,7 @@ export default function Todo(){
 
       function handleUpdate(id){
       axios({
-        url: '/updatetask/'+id,
+        url: '/api/updatetask/'+id,
         method: 'get',
         withCredentials: true
       }).then(response => {
@@ -124,7 +124,7 @@ export default function Todo(){
       function handleDelete(id){
       
         axios({
-          url: '/deletetask/'+id,
+          url: '/api/deletetask/'+id,
           method: 'get',
           withCredentials: true
         }).then(response => {

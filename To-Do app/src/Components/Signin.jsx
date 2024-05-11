@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {  useSetRecoilState } from "recoil";
 import { loginStateAtom,todoStateAtom,userStateAtom } from "../atom";
-axios.defaults.withCredentials=true;
+
 
 
 
@@ -23,7 +23,7 @@ const setUser=useSetRecoilState(userStateAtom)
      
       axios({
          method: 'post',
-         url: '/signin',
+         url: '/api/signin',
         
          data: {
            

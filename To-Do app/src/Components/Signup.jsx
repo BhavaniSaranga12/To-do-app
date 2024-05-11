@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { loginStateAtom , userStateAtom} from "../atom";
-axios.defaults.withCredentials=true;
+
 
 
 
@@ -24,7 +24,7 @@ export default function SignUp(){
      
       axios({
          method: 'post',
-         url: '/signup',
+         url: '/api/signup',
          headers: { 'Content-Type': 'application/json' },
          data: {
            name: name.toString(), 

@@ -16,7 +16,7 @@ import axios from "axios";
   useEffect(()=>{
       axios({
         method:'get',
-        url:'/',
+        url:'/api/',
         withCredentials: true
       }).then(response => {
         navigate('/')
@@ -47,7 +47,7 @@ import axios from "axios";
     const handleSignOut=()=>{
        axios({
         method:'get',
-        url:'/signout',
+        url:'/api/signout',
         withCredentials: true
        }).then((response)=>{
         

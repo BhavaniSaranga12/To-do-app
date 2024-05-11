@@ -10,7 +10,7 @@ dotenv.config();
 const app= express();
 
 const corsoption= {
-    origin:["https://to-do-app-frontend-seven.vercel.app"],
+    origin:["https://to-do-app-frontend-seven.vercel.app", ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
@@ -25,25 +25,25 @@ const User= require('./models/userModel.js');
 const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 
-const TodoDetailsValidation = async(req, res,next) => {
-    const TodoDetailsSchema= z.object({
-        title : z.string({
-            required_error: "Name is required"
-        }).min(3).max(50),
-        des:  z.string({
-            required_error: "Description is required"
-        }).min(5).max(180)
+// const TodoDetailsValidation = async(req, res,next) => {
+//     const TodoDetailsSchema= z.object({
+//         title : z.string({
+//             required_error: "Name is required"
+//         }).min(3).max(50),
+//         des:  z.string({
+//             required_error: "Description is required"
+//         }).min(5).max(180)
     
-    })
+//     })
 
-    try {
-        await TodoDetailsSchema.parseAsync(req.body);
-        next(); 
-    } catch (error) {
-        console.log(error)
-        res.status(400).json({ error: error.errors, status:false});
-    }
-}
+//     try {
+//         await TodoDetailsSchema.parseAsync(req.body);
+//         next(); 
+//     } catch (error) {
+//         console.log(error)
+//         res.status(400).json({ error: error.errors, status:false});
+//     }
+// }
 
 
 
@@ -186,7 +186,7 @@ app.get('/api/signout', (req,res)=> {
 
 
 
-app.post('/api/add-task',checkAuthentication,TodoDetailsValidation, async (req,res) => { 
+app.post('/api/add-task',checkAuthentication,async (req,res) => { 
 try {
    
     const findUser= await User.findByIdAndUpdate(req.user.id, {

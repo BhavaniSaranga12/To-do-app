@@ -41,6 +41,7 @@ const setUser=useSetRecoilState(userStateAtom)
          const name= response.data.details.name
           setUser(name);
           settodoState(response.data.details.todos)
+          localStorage.setItem('token', response.data.details.token)
          navigate('/', {replace: true});
          
          }

@@ -55,37 +55,35 @@ export default function Todo(){
          }
         })
         .catch(error => {
-          if (error.response && error.response.status === 400) {
+        //   if (error.response && error.response.status === 400) {
            
-            const validationErrors = error.response.data.error;
+        //     const validationErrors = error.response.data.error;
 
-            if (validationErrors) {
-              if(validationErrors.length==2){
-                setTitleError(validationErrors[0].message);
-                setDesError(validationErrors[1].message);
-              }
-              else if(validationErrors[0].path[0]=="title")
-              setTitleError(validationErrors[0].message);
-              else if(validationErrors[0].path[0]=="des"){
-                setDesError(validationErrors[0].message);
-              }
+        //     if (validationErrors) {
+        //       if(validationErrors.length==2){
+        //         setTitleError(validationErrors[0].message);
+        //         setDesError(validationErrors[1].message);
+        //       }
+        //       else if(validationErrors[0].path[0]=="title")
+        //       setTitleError(validationErrors[0].message);
+        //       else if(validationErrors[0].path[0]=="des"){
+        //         setDesError(validationErrors[0].message);
+        //       }
               
-              console.log(validationErrors);
-            }
-            else {
-              toast.error(error.response.data.message);
-              settodoState([])
-              setloginState(false);
-                console.log('Error:', error);
-            }
-        } 
+        //       console.log(validationErrors);
+        //     }
+        //     else {
+        //       toast.error(error.response.data.message);
+        //       settodoState([])
+        //       setloginState(false);
+        //         console.log('Error:', error);
+        //     }
+        // } 
         
-        else {
+        // else {
          
           toast.error("Internal server error");
             console.log('Error:', error);
-        }
-         
         });
         
       }
@@ -110,12 +108,12 @@ export default function Todo(){
         }
       })
       .catch(error => {
-        if (error.response && error.response.status === 400) {
-        toast.error(error.response.data.message);
-          settodoState([])
-          setloginState(false);
-        }
-        else
+        // if (error.response && error.response.status === 400) {
+        // toast.error(error.response.data.message);
+        //   settodoState([])
+        //   setloginState(false);
+        // }
+       // else
         console.error('Error:', error);
       });
       
@@ -141,12 +139,12 @@ export default function Todo(){
           }
         })
         .catch(error => {
-          if (error.response && error.response.status === 400) {
-            toast.error(error.response.data.message);
-              settodoState([])
-              setloginState(false);
-            }
-            else
+          // if (error.response && error.response.status === 400) {
+          //   toast.error(error.response.data.message);
+          //     settodoState([])
+          //     setloginState(false);
+          //   }
+          //   else
             console.error('Error:', error);
         });
         

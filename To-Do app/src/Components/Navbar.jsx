@@ -13,12 +13,17 @@ import axios from "axios";
   const [user, setUser]=useRecoilState(userStateAtom)
   const settodoState= useSetRecoilState(todoStateAtom) 
  const [loginState,setloginState]= useRecoilState(loginStateAtom);
+ 
+
+
+  const config = {
+     withCredentials: true
+  }
+
+
   useEffect(()=>{
-      axios({
-        method:'get',
-        url:'/api/',
-        withCredentials: true
-      }).then(response => {
+
+      axios.get('https://to-do-app-backend-nu.vercel.app/api/', config).then(response => {
         navigate('/')
         console.log('Response:', response.data);
         
@@ -45,11 +50,7 @@ import axios from "axios";
         navigate('/')
     }
     const handleSignOut=()=>{
-       axios({
-        method:'get',
-        url:'/api/signout',
-        withCredentials: true
-       }).then((response)=>{
+       axios.get('https://to-do-app-backend-nu.vercel.app/api/signout',config ).then((response)=>{
         
         console.log(response.data)
         setloginState(false);

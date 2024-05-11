@@ -23,10 +23,13 @@ export default function Todo(){
 
 
       function handleAdd () {
-
+        const config = {
+          withCredentials: true
+       }
         axios({
           method: 'post',
-          url: '/api/add-task',
+          url: 'https://to-do-app-backend-nu.vercel.app/api/add-task',
+          config,
           data: {
             title: title, 
             des: des,
@@ -90,11 +93,10 @@ export default function Todo(){
 
 
       function handleUpdate(id){
-      axios({
-        url: '/api/updatetask/'+id,
-        method: 'get',
-        withCredentials: true
-      }).then(response => {
+        const config = {
+          withCredentials: true
+       }
+      axios.get('https://to-do-app-backend-nu.vercel.app/api/updatetask/'+id,config).then(response => {
         console.log(response.data);
         if(response.data.status){
         const updatedTodos= response.data.todos;
@@ -122,12 +124,10 @@ export default function Todo(){
       }
 
       function handleDelete(id){
-      
-        axios({
-          url: '/api/deletetask/'+id,
-          method: 'get',
+        const config = {
           withCredentials: true
-        }).then(response => {
+       }
+        axios.get('https://to-do-app-backend-nu.vercel.app/api/deletetask/'+id, config).then(response => {
           console.log(response.data);
           if(response.data.status){
           const updatedTodos= response.data.todos;

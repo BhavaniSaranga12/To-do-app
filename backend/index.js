@@ -165,7 +165,8 @@ app.post('/api/signin',  async (req,res)=> {
         }).status(200).json({message: "sign in successful", status: true,details : {
             name : checkUser.name,
             id:checkUser._id,
-            todos: checkUser.todos
+            todos: checkUser.todos,
+            token:token
         }})
       }
       else {

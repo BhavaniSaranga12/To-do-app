@@ -55,6 +55,7 @@ import axios from "axios";
         console.log(response.data)
         setloginState(false);
         settodoState([])
+        localStorage.removeItem('token')
        }).catch(error=> {
        console.log(error)
        })

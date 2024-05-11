@@ -16,7 +16,9 @@ import toast from "react-hot-toast";
  const [loginState,setloginState]= useRecoilState(loginStateAtom);
  
 
-
+const config= {
+  withCredentials:true,
+}
   
 
 
@@ -24,6 +26,7 @@ import toast from "react-hot-toast";
 
       axios({
         url:'https://to-do-app-backend-nu.vercel.app/api/',
+        config,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
     },
@@ -44,7 +47,7 @@ import toast from "react-hot-toast";
          if(error.response.status===401 && error.response) {
           toast.error(error.response.data.message);
          }
-         
+
        });
   
   },[])

@@ -14,7 +14,9 @@ export default function Todo(){
     const [title, setTitle]=useState("");
     const [des, setDes]=useState('');
    
-   
+    const config= {
+      withCredentials:true,
+    }
     const handleonchange= (event) => {
       setTitle(event.target.value); 
       setTitleError('');
@@ -26,6 +28,7 @@ export default function Todo(){
       
         axios({
           method: 'post',
+          config,
           url: 'https://to-do-app-backend-nu.vercel.app/api/add-task',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -94,6 +97,7 @@ export default function Todo(){
         
       axios({
         method: get,
+        config,
         url: 'https://to-do-app-backend-nu.vercel.app/api/updatetask/'+id, 
       headers : {
         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -125,11 +129,10 @@ export default function Todo(){
       }
 
       function handleDelete(id){
-        const config = {
-          withCredentials: true
-       }
+        
         axios({
           method:get,
+          config,
           url: 'https://to-do-app-backend-nu.vercel.app/api/deletetask/'+id,
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`

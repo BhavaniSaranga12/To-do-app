@@ -24,7 +24,10 @@ export default function Todo(){
 
       function handleAdd () {
         const config = {
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
        }
         axios({
           method: 'post',
@@ -35,7 +38,7 @@ export default function Todo(){
             des: des,
             
           },
-          withCredentials: true
+         
         })
         .then(response => {
           console.log('Response:', response.data);

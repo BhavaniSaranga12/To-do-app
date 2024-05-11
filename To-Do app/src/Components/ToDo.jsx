@@ -25,14 +25,15 @@ export default function Todo(){
       function handleAdd () {
         const config = {
           withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
+         
        }
         axios({
           method: 'post',
           url: 'https://to-do-app-backend-nu.vercel.app/api/add-task',
           config,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
           data: {
             title: title, 
             des: des,

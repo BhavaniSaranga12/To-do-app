@@ -125,6 +125,7 @@ app.post('/api/signup',  async (req,res)=> {
                  maxAge: expirationTime,
                 httpOnly: true, 
                 secure: true,
+                sameSite:"none",
                 
             }).status(201).json({message: "Sign Up Successful", status: true, details : {
                 name : newUser.name,
@@ -161,6 +162,7 @@ app.post('/api/signin',  async (req,res)=> {
          maxAge: expirationTime,
             httpOnly: true, 
             secure: true,
+            sameSite:"none",
             
         }).status(200).json({message: "sign in successful", status: true,details : {
             name : checkUser.name,

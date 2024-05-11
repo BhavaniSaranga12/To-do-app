@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import {  useSetRecoilState } from "recoil";
 import { loginStateAtom , userStateAtom} from "../atom";
 
 
@@ -40,7 +40,7 @@ export default function SignUp(){
           const name= response.data.details.name
           setUser(name);
           setloginState(true);
-         
+          localStorage.setItem('token', response.data.details.token)
          navigate('/', {replace: true});
          }
          

@@ -23,14 +23,10 @@ export default function Todo(){
 
 
       function handleAdd () {
-        const config = {
-          withCredentials: true,
-         
-       }
+      
         axios({
           method: 'post',
           url: 'https://to-do-app-backend-nu.vercel.app/api/add-task',
-          config,
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
@@ -95,10 +91,13 @@ export default function Todo(){
 
 
       function handleUpdate(id){
-        const config = {
-          withCredentials: true
-       }
-      axios.get('https://to-do-app-backend-nu.vercel.app/api/updatetask/'+id,config).then(response => {
+        
+      axios({
+        method: get,
+        url: 'https://to-do-app-backend-nu.vercel.app/api/updatetask/'+id, 
+      headers : {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    }}).then(response => {
         console.log(response.data);
         if(response.data.status){
         const updatedTodos= response.data.todos;
@@ -129,7 +128,14 @@ export default function Todo(){
         const config = {
           withCredentials: true
        }
-        axios.get('https://to-do-app-backend-nu.vercel.app/api/deletetask/'+id, config).then(response => {
+        axios({
+          method:get,
+          url: 'https://to-do-app-backend-nu.vercel.app/api/deletetask/'+id,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+
+        }).then(response => {
           console.log(response.data);
           if(response.data.status){
           const updatedTodos= response.data.todos;
@@ -188,8 +194,6 @@ export default function Todo(){
       <li className='innertxt'>
       <h1>Oopsss no todos</h1>
     </li>
-          {/* <div className='innertxt'><h1>Oopsss no todos </h1>
-           </div> */}
       </ul>}
        </div>
       </div> 

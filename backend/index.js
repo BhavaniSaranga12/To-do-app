@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const checkAuthentication = async (req, res, next) => {
-    // const token = req.cookies.token;
+   
     const token = req.headers.authorization?.split(' ')[1]
                
     console.log(token)
@@ -120,18 +120,12 @@ app.post('/api/signup',  async (req,res)=> {
             }
            const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' })
          
-          const expirationTime = 7 * 24 * 60 * 60 * 1000;
+         
            
-            res.cookie("token",token,{
-                //  maxAge: 60000,
-                 maxAge: expirationTime,
-                httpOnly: true, 
-                secure: true,
-                sameSite:"none",
-                
-            }).status(201).json({message: "Sign Up Successful", status: true, details : {
+            res.status(201).json({message: "Sign Up Successful", status: true, details : {
                 name : newUser.name,
                 id:newUser._id,
+                token:token
             }})
         }) } 
     } catch (error) {
@@ -156,17 +150,10 @@ app.post('/api/signin',  async (req,res)=> {
         }
         
       
-       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'7d' })
-      const expirationTime = 7 * 24 * 60 * 60 * 1000;
+       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'1m' })
+     ;
        
-        res.cookie("token",token,{
-         // maxAge:60000,
-         maxAge: expirationTime,
-            httpOnly: true, 
-            secure: true,
-            sameSite:"none",
-            
-        }).status(200).json({message: "sign in successful", status: true,details : {
+        res.status(200).json({message: "sign in successful", status: true,details : {
             name : checkUser.name,
             id:checkUser._id,
             todos: checkUser.todos,
@@ -184,9 +171,9 @@ app.post('/api/signin',  async (req,res)=> {
 
 
 
-app.get('/api/signout', (req,res)=> {
-    res.clearCookie('token').status(200).json({message: "successfully signed out"})
-})
+// app.get('/api/signout', (req,res)=> {
+//     res.clearCookie('token').status(200).json({message: "successfully signed out"})
+// })
 
 
 

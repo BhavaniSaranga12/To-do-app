@@ -6,6 +6,7 @@ import {  useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { loginStateAtom, todoStateAtom, userStateAtom } from "../atom";
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
@@ -16,14 +17,17 @@ import axios from "axios";
  
 
 
-  const config = {
-     withCredentials: true
-  }
+  
 
 
   useEffect(()=>{
 
-      axios.get('https://to-do-app-backend-nu.vercel.app/api/', config).then(response => {
+      axios({
+        url:'https://to-do-app-backend-nu.vercel.app/api/',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    },
+      }).then(response => {
         navigate('/')
         console.log('Response:', response.data);
         
@@ -36,6 +40,11 @@ import axios from "axios";
          
          }).catch(error => {
          console.error('Error:', error);
+
+         if(error.response.status===401 && error.response) {
+          toast.error(error.response.data.message);
+         }
+         
        });
   
   },[])
@@ -50,15 +59,10 @@ import axios from "axios";
         navigate('/')
     }
     const handleSignOut=()=>{
-       axios.get('https://to-do-app-backend-nu.vercel.app/api/signout',config ).then((response)=>{
-        
-        console.log(response.data)
-        setloginState(false);
+      setloginState(false);
         settodoState([])
         localStorage.removeItem('token')
-       }).catch(error=> {
-       console.log(error)
-       })
+        toast.success('successfully signed out')
     }
     return <div id="nav-bar">
         

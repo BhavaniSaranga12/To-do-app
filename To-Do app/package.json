@@ -2,7 +2,6 @@
   "name": "to-do-app",
   "private": true,
   "version": "0.0.0",
-  "proxy": "https://to-do-app-backend-nu.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",

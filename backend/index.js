@@ -8,13 +8,16 @@ const {z}= require('zod')
 var cookieParser = require('cookie-parser')
 dotenv.config();
 const app= express();
-app.use(cors({
+
+const corsoption= {
     origin:["https://to-do-app-frontend-seven.vercel.app"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
 }
-));
+
+
+app.use(cors(corsoption));
 app.use(cookieParser())
 app.use(express.json());
 const dbConfig= require('./dbConfig.js');

@@ -52,32 +52,7 @@ export default function Todo(){
         
         })
         .catch(error => {
-        //   if (error.response && error.response.status === 400) {
-           
-        //     const validationErrors = error.response.data.error;
-
-        //     if (validationErrors) {
-        //       if(validationErrors.length==2){
-        //         setTitleError(validationErrors[0].message);
-        //         setDesError(validationErrors[1].message);
-        //       }
-        //       else if(validationErrors[0].path[0]=="title")
-        //       setTitleError(validationErrors[0].message);
-        //       else if(validationErrors[0].path[0]=="des"){
-        //         setDesError(validationErrors[0].message);
-        //       }
-              
-        //       console.log(validationErrors);
-        //     }
-        //     else {
-        //       toast.error(error.response.data.message);
-        //       settodoState([])
-        //       setloginState(false);
-        //         console.log('Error:', error);
-        //     }
-        // } 
-        
-        // else {
+   
           console.log('Error:', error);   
         if(error.response.status===401 ) {
           toast.error('Token expired');
@@ -85,6 +60,23 @@ export default function Todo(){
           setloginState(false);
           localStorage.removeItem('token');
         }
+        else if(error.response.data.type=="detailsError"){
+          const validationErrors = error.response.data.error;
+
+            if (validationErrors) {
+              if(validationErrors.length==2){
+                setTitleError(validationErrors[0].message);
+                setDesError(validationErrors[1].message);
+              }
+              else if(validationErrors[0].path[0]=="title")
+              setTitleError(validationErrors[0].message);
+              else if(validationErrors[0].path[0]=="des"){
+                setDesError(validationErrors[0].message);
+              }
+              
+              console.log(validationErrors);
+            }
+          }
         else 
           toast.error(error.response.data.message);
         

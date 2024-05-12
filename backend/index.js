@@ -25,25 +25,25 @@ const User= require('./models/userModel.js');
 const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 
-// const TodoDetailsValidation = async(req, res,next) => {
-//     const TodoDetailsSchema= z.object({
-//         title : z.string({
-//             required_error: "Name is required"
-//         }).min(3).max(50),
-//         des:  z.string({
-//             required_error: "Description is required"
-//         }).min(5).max(180)
+const TodoDetailsValidation = async(req, res,next) => {
+    const TodoDetailsSchema= z.object({
+        title : z.string({
+            required_error: "Name is required"
+        }).min(3).max(50),
+        des:  z.string({
+            required_error: "Description is required"
+        }).min(5).max(180)
     
-//     })
+    })
 
-//     try {
-//         await TodoDetailsSchema.parseAsync(req.body);
-//         next(); 
-//     } catch (error) {
-//         console.log(error)
-//         res.status(400).json({ error: error.errors, status:false});
-//     }
-// }
+    try {
+        await TodoDetailsSchema.parseAsync(req.body);
+        next(); 
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error.errors, status:false, type: "detailsError"});
+    }
+}
 
 
 
@@ -127,7 +127,7 @@ app.post('/api/signup',  async (req,res)=> {
                 email:req.body.email, 
                
             }
-           const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' })
+           const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15d' })
          
          
            
@@ -159,7 +159,7 @@ app.post('/api/signin',  async (req,res)=> {
         }
         
       
-       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'1m' })
+       const token= jwt.sign(payload, process.env.JWT_SECRET, { expiresIn:'15d' })
      ;
        
         res.status(200).json({message: "sign in successful", status: true,details : {

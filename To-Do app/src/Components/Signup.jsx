@@ -34,7 +34,7 @@ export default function SignUp(){
          }
        })
        .then(response => {
-        console.log('Response:', response.data);
+       
          if(response.data.status){
           toast.success(response.data.message);
           const name= response.data.details.name

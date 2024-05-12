@@ -30,7 +30,7 @@ function App() {
    <NavBar /> 
     <Routes>
       <Route path='/signup' element={ loginState? <Navigate to="/" replace /> : <SignUp />} /> 
-      <Route path='https://to-do-app-frontend-seven.vercel.app/signin' element={loginState? <Navigate to="/" replace /> : <SignIn/>} />
+      <Route path='/signin' element={loginState? <Navigate to="/" replace /> : <SignIn/>} />
       <Route path='/' element={<Todo/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>

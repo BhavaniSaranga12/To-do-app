@@ -34,7 +34,7 @@ const setUser=useSetRecoilState(userStateAtom)
          }
        })
        .then(response => {
-         console.log('Response:', response.data);
+         
          if(response.data.status){
           toast.success(response.data.message);
           setloginState(true);

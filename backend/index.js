@@ -79,7 +79,7 @@ const checkAuthentication = async (req, res, next) => {
             return res.status(401).json({ status: false, message: "Token expired" });
         } else {
            
-            return res.status(500).json({ status: false, message: "Internal server error" });
+            return res.status(500).json({ status: false, message: "Internal server error", error: error});
         }
     }
 };

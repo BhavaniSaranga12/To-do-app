@@ -8,10 +8,8 @@ import { Toaster} from 'react-hot-toast';
 import Todo from './Components/ToDo';
 import {  useRecoilValue, useSetRecoilState, useRecoilState} from 'recoil';
 import NavBar from './Components/Navbar';
-// import { loginStateAtom } from './atom';
-import { loginStateAtom, todoStateAtom, userStateAtom } from "./atom";
-import toast from 'react-hot-toast';
-import { useNavigate} from "react-router-dom"
+ import { loginStateAtom } from './atom';
+
 
 
 function NotFound() {
@@ -20,52 +18,8 @@ function NotFound() {
 
 
 function App() {
-  // const loginState= useRecoilValue(loginStateAtom);
+   const loginState= useRecoilValue(loginStateAtom);
   
-  // const [user, setUser]=useRecoilState(userStateAtom)
-  const setUser= useSetRecoilState(userStateAtom);
-  const settodoState= useSetRecoilState(todoStateAtom) 
- const [loginState,setloginState]= useRecoilState(loginStateAtom);
- 
- const navigate= useNavigate();
-const config= {
-  withCredentials:true,
-}
-  
-
-
-  useEffect(()=>{
-
-      axios({
-        url:'https://to-do-app-backend-nu.vercel.app/api/',
-        config,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-    },
-      }).then(response => {
-        navigate('/')
-        console.log('Response:', response.data);
-        
-         if(response.data.status){
-          setUser(response.data.details.name);
-          setloginState(true);
-          settodoState(response.data.details.todos);
-          
-         }
-         
-         }).catch(error => {
-         console.error('Error:', error);
-
-         if(error.response.status===401) {
-         localStorage.removeItem('token');
-       
-          toast.error(error.response.data.message);
-         }
-        
-
-       });
-  
-  },[])
     
   return (
     <>
@@ -75,7 +29,7 @@ const config= {
     <BrowserRouter>
    <NavBar /> 
     <Routes>
-      <Route path='https://to-do-app-frontend-seven.vercel.app/signup' element={ loginState? <Navigate to="/" replace /> : <SignUp />} /> 
+      <Route path='/signup' element={ loginState? <Navigate to="/" replace /> : <SignUp />} /> 
       <Route path='https://to-do-app-frontend-seven.vercel.app/signin' element={loginState? <Navigate to="/" replace /> : <SignIn/>} />
       <Route path='/' element={<Todo/>} />
       <Route path="*" element={<NotFound />} />

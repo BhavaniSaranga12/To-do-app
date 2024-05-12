@@ -49,13 +49,7 @@ export default function Todo(){
           console.log(response.data.todos)
           toast.success(response.data.message);
          }
-         else {
-          console.log(response)
-          toast.error(response.data.message);
-          settodoState([])
-          setloginState(false);
-          
-         }
+        
         })
         .catch(error => {
         //   if (error.response && error.response.status === 400) {
@@ -84,9 +78,16 @@ export default function Todo(){
         // } 
         
         // else {
-         
-          toast.error("Internal server error");
-            console.log('Error:', error);
+          console.log('Error:', error);   
+        if(error.response.data.name==='TokenExpiredError') {
+          toast.error('Token expired');
+          settodoState([])
+          setloginState(false);
+          localStorage.removeItem('token');
+        }
+        else 
+          toast.error(error.response.data.message);
+        
         });
         
       }
@@ -96,7 +97,7 @@ export default function Todo(){
       function handleUpdate(id){
         
       axios({
-        method: get,
+        method: 'get',
         config,
         url: 'https://to-do-app-backend-nu.vercel.app/api/updatetask/'+id, 
       headers : {
@@ -131,7 +132,7 @@ export default function Todo(){
       function handleDelete(id){
         
         axios({
-          method:get,
+          method:'get',
           config,
           url: 'https://to-do-app-backend-nu.vercel.app/api/deletetask/'+id,
           headers: {

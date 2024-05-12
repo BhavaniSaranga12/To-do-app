@@ -79,7 +79,7 @@ export default function Todo(){
         
         // else {
           console.log('Error:', error);   
-        if(error.response.data.name==='TokenExpiredError') {
+        if(error.response.status===401) {
           toast.error('Token expired');
           settodoState([])
           setloginState(false);
@@ -119,7 +119,7 @@ export default function Todo(){
         // }
        // else
         console.error('Error:', error);
-        if(error.response.data.name==='TokenExpiredError') {
+        if(error.response.status===401) {
           toast.error('Token expired');
           settodoState([])
           setloginState(false);
@@ -160,7 +160,7 @@ export default function Todo(){
           //   }
           //   else
             console.error('Error:', error);
-            if(error.response.data.name==='TokenExpiredError') {
+            if(error.response.status===401) {
               toast.error('Token expired');
               settodoState([])
               setloginState(false);

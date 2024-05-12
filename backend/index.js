@@ -75,9 +75,13 @@ const checkAuthentication = async (req, res, next) => {
         }
     } catch (error) {
         console.log(error);
-        if (error.name === 'TokenExpiredError'|| error.name==='JsonWebTokenError') {
+        if (error.name === 'TokenExpiredError') {
             return res.status(401).json({ status: false, message: "Token expired" });
-        } else {
+        } 
+        else if( error.name==='JsonWebTokenError') {
+            return res.status(400).json({ status: false, message: "please Sign in/Sign up" });
+        }  
+            else {
            
             return res.status(500).json({ status: false, message: "Internal server error", error: error});
         }

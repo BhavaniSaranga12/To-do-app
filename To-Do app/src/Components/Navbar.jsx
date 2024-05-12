@@ -2,58 +2,59 @@
 import { useNavigate} from "react-router-dom"
 
 
-import {  useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {  useRecoilState,  useRecoilValue,  useSetRecoilState } from "recoil";
 import { loginStateAtom, todoStateAtom, userStateAtom } from "../atom";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from "axios";
 import toast from "react-hot-toast";
 
 
 
  const NavBar =  ()=>{
-  const [user, setUser]=useRecoilState(userStateAtom)
+  const user= useRecoilValue(userStateAtom);
+  // const [user, setUser]=useRecoilState(userStateAtom)
   const settodoState= useSetRecoilState(todoStateAtom) 
  const [loginState,setloginState]= useRecoilState(loginStateAtom);
  
 
-const config= {
-  withCredentials:true,
-}
+// const config= {
+//   withCredentials:true,
+// }
   
 
 
-  useEffect(()=>{
+//   useEffect(()=>{
 
-      axios({
-        url:'https://to-do-app-backend-nu.vercel.app/api/',
-        config,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-    },
-      }).then(response => {
-        navigate('/')
-        console.log('Response:', response.data);
+//       axios({
+//         url:'https://to-do-app-backend-nu.vercel.app/api/',
+//         config,
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem('token')}`
+//     },
+//       }).then(response => {
+//         navigate('/')
+//         console.log('Response:', response.data);
         
-         if(response.data.status){
-          setUser(response.data.details.name);
-          setloginState(true);
-          settodoState(response.data.details.todos);
+//          if(response.data.status){
+//           setUser(response.data.details.name);
+//           setloginState(true);
+//           settodoState(response.data.details.todos);
           
-         }
+//          }
          
-         }).catch(error => {
-         console.error('Error:', error);
+//          }).catch(error => {
+//          console.error('Error:', error);
 
-         if(error.response.status===401) {
-         localStorage.removeItem('token');
+//          if(error.response.status===401) {
+//          localStorage.removeItem('token');
        
-          toast.error(error.response.data.message);
-         }
+//           toast.error(error.response.data.message);
+//          }
         
 
-       });
+//        });
   
-  },[])
+//   },[])
  
         const navigate= useNavigate();
     const handleonclick= ()=>{

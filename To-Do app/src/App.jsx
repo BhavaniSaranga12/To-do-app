@@ -6,10 +6,14 @@ import SignUp from './Components/Signup';
 import SignIn from './Components/Signin';
 import { Toaster} from 'react-hot-toast';
 import Todo from './Components/ToDo';
-import {  useRecoilValue } from 'recoil';
+import {  useRecoilValue, useSetRecoilState } from 'recoil';
 import NavBar from './Components/Navbar';
 // import { loginStateAtom } from './atom';
 import { loginStateAtom, todoStateAtom, userStateAtom } from "./atom";
+import toast from 'react-hot-toast';
+import { useNavigate} from "react-router-dom"
+
+
 function NotFound() {
   return <h1 style={{textAlign: "center"}}>404 - Not Found</h1>;
 }
@@ -17,12 +21,13 @@ function NotFound() {
 
 function App() {
   // const loginState= useRecoilValue(loginStateAtom);
- 
-  const [user, setUser]=useRecoilState(userStateAtom)
+  
+  // const [user, setUser]=useRecoilState(userStateAtom)
+  const setUser= useSetRecoilState(userStateAtom);
   const settodoState= useSetRecoilState(todoStateAtom) 
  const [loginState,setloginState]= useRecoilState(loginStateAtom);
  
-
+ const navigate= useNavigate();
 const config= {
   withCredentials:true,
 }

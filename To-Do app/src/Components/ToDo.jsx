@@ -109,11 +109,7 @@ export default function Todo(){
          settodoState(updatedTodos)
          toast.success(response.data.message);
         }
-        else {
-          toast.error(response.data.message);
-          settodoState([])
-          setloginState(false);
-        }
+        
       })
       .catch(error => {
         // if (error.response && error.response.status === 400) {
@@ -123,6 +119,14 @@ export default function Todo(){
         // }
        // else
         console.error('Error:', error);
+        if(error.response.data.name==='TokenExpiredError') {
+          toast.error('Token expired');
+          settodoState([])
+          setloginState(false);
+          localStorage.removeItem('token');
+        }
+        else 
+          toast.error(error.response.data.message);
       });
       
       
@@ -146,11 +150,7 @@ export default function Todo(){
            settodoState(updatedTodos)
            toast.success(response.data.message)
           }
-          else {
-            toast.error(response.data.message)
-            setloginState(false);
-            settodoState([])
-          }
+         
         })
         .catch(error => {
           // if (error.response && error.response.status === 400) {
@@ -160,6 +160,14 @@ export default function Todo(){
           //   }
           //   else
             console.error('Error:', error);
+            if(error.response.data.name==='TokenExpiredError') {
+              toast.error('Token expired');
+              settodoState([])
+              setloginState(false);
+              localStorage.removeItem('token');
+            }
+            else 
+              toast.error(error.response.data.message);
         });
         
         }

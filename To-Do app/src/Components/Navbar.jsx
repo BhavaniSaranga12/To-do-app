@@ -44,7 +44,12 @@ const config= {
          }).catch(error => {
          console.error('Error:', error);
 
-         if(error.response.status===401 && error.response) {
+         if(error.response.status===401 || error.response.status===401) {
+         localStorage.removeItem('token');
+       
+          toast.error(error.response.data.message);
+         }
+         else{
           toast.error(error.response.data.message);
          }
 

@@ -187,7 +187,7 @@ app.post('/api/signin',  async (req,res)=> {
 
 
 
-app.post('/api/add-task',checkAuthentication,async (req,res) => { 
+app.post('/api/add-task',checkAuthentication,TodoDetailsValidation,async (req,res) => { 
 try {
    
     const findUser= await User.findByIdAndUpdate(req.user.id, {
